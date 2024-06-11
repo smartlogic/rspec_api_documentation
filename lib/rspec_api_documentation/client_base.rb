@@ -44,9 +44,12 @@ module RspecApiDocumentation
     end
 
     def read_request_body
-      input = last_request.env["rack.input"]
-      input.rewind
-      input.read
+      if input = last_request.env["rack.input"]
+        input.rewind
+        input.read
+      else
+        ""
+      end
     end
 
     def document_example(method, path)
